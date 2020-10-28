@@ -25,7 +25,7 @@ public class ObtacleCreator : MonoBehaviour
     }
     void CrearColumna()
     {
-        randomNumber = Random.Range(0f, 10f);
+        randomNumber = Random.Range(0f, 20f);
         RandomPos = new Vector3(randomNumber, 0, 0);
         print(RandomPos);
         Vector3 FinalPos = InitPos.position + RandomPos;
