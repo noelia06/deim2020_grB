@@ -31,8 +31,8 @@ public class ObstacleMove : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //Asignamos una velocidad fija (de momento)
-        obstacleSpeed = 2.5f;
+        //Asignamos la velocidad de la nave para que aumente al mismo tiempo.
+        obstacleSpeed = spaceshipMove.speed;
         transform.Translate(Vector3.back * Time.deltaTime * obstacleSpeed);
  
     }

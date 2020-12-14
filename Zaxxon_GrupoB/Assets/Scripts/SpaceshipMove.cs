@@ -20,13 +20,15 @@ public class SpaceshipMove : MonoBehaviour
 
     //Capturo el texto del UI que indicará la distancia recorrida
     [SerializeField] Text TextDistance;
+    public GameObject ObstacleMove;
     
     // Start is called before the first frame update
     void Start()
     {
         //Llamo a la corrutina que hace aumentar la velocidad
         StartCoroutine("Distancia");
-        
+        //Velocidad del obstaculo relacionado con la nave.
+        ObstacleMove = GameObject.Find("ObstacleMove");
     }
 
     // Update is called once per frame
@@ -45,7 +47,11 @@ public class SpaceshipMove : MonoBehaviour
         for(int n = 0; ; n += 10)
         {
             //Cambio el texto que aparece en pantalla
-            TextDistance.text = "DISTANCIA: " + n;
+            TextDistance.text = "DISTANCIA: " + n * speed;
+            
+            {
+               // speed += 3f;
+            }
 
             //Ejecuto cada ciclo esperando 1 segundo
             yield return new WaitForSeconds(1f);
