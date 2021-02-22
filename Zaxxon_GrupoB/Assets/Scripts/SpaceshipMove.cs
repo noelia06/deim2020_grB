@@ -11,6 +11,9 @@ public class SpaceshipMove : MonoBehaviour
     //La nave NO se mueve, son los obtstáculos los que se desplazan
     public float speed = 3f;
     [SerializeField] MeshRenderer myMesh;
+    public GameObject ExplosionParticulas;
+    Vector3 pos;
+    public GameObject SonidoExplosion;
 
     //Variable que determina cómo de rápido se mueve la nave con el joystick
     //De momento fija, ya veremos si aumenta con la velocidad o con powerUps
@@ -66,6 +69,8 @@ public class SpaceshipMove : MonoBehaviour
         {
             myMesh.enabled = false;
             speed = 0;
+             Instantiate(ExplosionParticulas, pos, Quaternion.identity);
+             Instantiate(SonidoExplosion);
         }
     }
 
