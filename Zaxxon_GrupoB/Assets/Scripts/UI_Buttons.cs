@@ -9,8 +9,18 @@ public class UI_Buttons : MonoBehaviour
     // Start is called before the first frame update
   
 
-    public void CambiarScene()
+    public void CambiarStart()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void CambiarHighScores()
+    {
+        SceneManager.LoadScene(2);
+    }
+     
+    public void CambiarVolver()
+    {
+        SceneManager.LoadScene(0);
     }
 }
