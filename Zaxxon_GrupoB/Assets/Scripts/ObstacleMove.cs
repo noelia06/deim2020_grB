@@ -8,6 +8,7 @@ public class ObstacleMove : MonoBehaviour
     //Creamos la variable a la que se moverá el obtáculo
     //Este valor deberá depender de la velocidad de la nave
     private float obstacleSpeed;
+    
 
     public GameObject SpaceShip;
     SpaceshipMove spaceshipMove;
@@ -31,9 +32,11 @@ public class ObstacleMove : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //Asignamos una velocidad fija (de momento)
-        obstacleSpeed = 2.5f;
+        //Asignamos la velocidad de la nave para que aumente al mismo tiempo.
+        obstacleSpeed = spaceshipMove.speed;
         transform.Translate(Vector3.back * Time.deltaTime * obstacleSpeed);
  
     }
+
+    
 }

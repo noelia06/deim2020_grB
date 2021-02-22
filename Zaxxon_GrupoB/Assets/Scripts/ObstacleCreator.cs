@@ -16,9 +16,14 @@ public class ObstacleCreator : MonoBehaviour
     private float randomNumber;
     Vector3 RandomPos;
     [SerializeField] float distanciaInicial = 8;
+
+    public GameObject Nave;
+    private SpaceshipMove spaceshipMove;
     // Start is called before the first frame update
     void Start()
     {
+
+        spaceshipMove = Nave.GetComponent<SpaceshipMove>();
 
         for (int n= 1; n <= 30; n++)
         {
@@ -32,7 +37,7 @@ public class ObstacleCreator : MonoBehaviour
     //Función que crea una columna en una posición Random
     void CrearColumna(float posZ = 0f)
     {
-        randomNumber = Random.Range(0f, 7f);
+        randomNumber = Random.Range(-6f, 7f);
         RandomPos = new Vector3(randomNumber, 0, posZ);
         //print(RandomPos);
         Vector3 FinalPos = InitPos.position + RandomPos;
@@ -47,10 +52,11 @@ public class ObstacleCreator : MonoBehaviour
         for (; ; )
         {
             CrearColumna();
-            yield return new WaitForSeconds(1f);
+            float interval = 4 / spaceshipMove.speed;
+            yield return new WaitForSeconds(interval);
         }
 
     }
 
-
+   
 }
