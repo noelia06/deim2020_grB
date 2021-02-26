@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; //Importante importar esta librería para usar la UI
+using UnityEngine.UI; 
+using UnityEngine.SceneManagement;
 
 public class SpaceshipMove : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class SpaceshipMove : MonoBehaviour
     public GameObject ExplosionParticulas;
     Vector3 pos;
     public GameObject SonidoExplosion;
+    
 
     //Variable que determina cómo de rápido se mueve la nave con el joystick
     //De momento fija, ya veremos si aumenta con la velocidad o con powerUps
@@ -24,6 +26,8 @@ public class SpaceshipMove : MonoBehaviour
 
     //Capturo el texto del UI que indicará la distancia recorrida
     [SerializeField] Text TextDistance;
+    [SerializeField] Text TextTime;
+    float tiempo;
     public GameObject ObstacleMove;
     
     // Start is called before the first frame update
@@ -40,6 +44,7 @@ public class SpaceshipMove : MonoBehaviour
     {
         //Ejecutamos la función propia que permite mover la nave con el joystick
         MoverNave();
+        Tiempo();
 
     }
 
@@ -67,10 +72,8 @@ public class SpaceshipMove : MonoBehaviour
     {
         if (other.gameObject.tag == "obstacle")
         {
-            myMesh.enabled = false;
-            speed = 0;
-             Instantiate(ExplosionParticulas, pos, Quaternion.identity);
-             Instantiate(SonidoExplosion);
+            
+         StartCoroutine("Choque");
         }
     }
 
@@ -97,69 +100,16 @@ public class SpaceshipMove : MonoBehaviour
         //Lo multiplicamos por deltaTime, el eje y la velocidad de movimiento la nave
         
 
-        /*
-        float myPosX = transform.position.x;
-        float myPosY = transform.position.y;
-
-        if (myPosX < -5 && desplX < 0) 
-        {
-
-            inMarginMoveX = false;
-        }
-        else if ( myPosX < -5 && desplX > 0)
-            {
-            inMarginMoveX = true;
-        }
-        else if (myPosX > 5 && desplX > 0)
-        {
-            inMarginMoveX = false;
-        }
-
-        else if (myPosX > 5 && desplX < 0)
-        {
-            inMarginMoveX = true;
-        }
-
-        if (myPosY < 0 && desplY < 0)
-        {
-
-            inMarginMoveY = false;
-        }
-        else if (myPosY < 0 && desplY > 0)
-        {
-            inMarginMoveY = true;
-        }
-        else if (myPosY > 5 && desplY > 0)
-        {
-            inMarginMoveY = false;
-        }
-
-        else if (myPosY > 5 && desplY < 0)
-        {
-            inMarginMoveY = true;
-        }
-
-        if (inMarginMoveX)
-        {
-            transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * desplX);
-            
-        }
-
-        if (inMarginMoveY)
-        {
-            transform.Translate(Vector3.up * Time.deltaTime * moveSpeed * desplY);
-        }
-        */
         float posX = transform.position.x;
         float posY = transform.position.y;
         
-        if (posX < 6 && posX > -3 || posX < -3 && desplX > 6 || posX > 6 && desplX < -3)
+        if (posX < 3.5 && posX > -4.5 || posX < -4.5 && desplX > 0 || posX > 3.5 && desplX < 0)
         {
             transform.Translate(Vector3.right * Time.deltaTime * speed * desplX);
 
         }
 
-        if (posY < 3 && posY > 0 || posY < 1 && desplY > 3 || posY > 3 && desplY < 0)
+        if (posY < 3 && posY > 1 || posY < 1 && desplY > 0 || posY > 3 && desplY < 0)
         {
             transform.Translate(Vector3.up * Time.deltaTime * speed * desplY);
         }
@@ -167,6 +117,22 @@ public class SpaceshipMove : MonoBehaviour
     }
 
 
+   void Tiempo()
+   {
 
+       tiempo+=Time.deltaTime;
+       float segundos = (int)tiempo%60;
+       float minutos = (int)((tiempo/60)%60);
+       TextTime.text = "Tiempo: " + minutos.ToString("00") + ":" + segundos.ToString("00");
+   }
 
+    IEnumerator Choque()
+    {
+      myMesh.enabled = false;
+            speed = 0;
+             Instantiate(ExplosionParticulas, pos, Quaternion.identity);
+             Instantiate(SonidoExplosion);
+             yield return new WaitForSeconds(2f);
+             SceneManager.LoadScene("GameOver");
+    }
 }

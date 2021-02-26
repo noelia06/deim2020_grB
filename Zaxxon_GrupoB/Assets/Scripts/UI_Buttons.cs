@@ -23,4 +23,8 @@ public class UI_Buttons : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+    public void Salir()
+    {
+      Application.Quit();
+    }
 }

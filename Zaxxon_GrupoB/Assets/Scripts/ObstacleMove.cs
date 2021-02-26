@@ -7,7 +7,7 @@ public class ObstacleMove : MonoBehaviour
 
     //Creamos la variable a la que se moverá el obtáculo
     //Este valor deberá depender de la velocidad de la nave
-    private float obstacleSpeed;
+    private float obstacleSpeed = 2f;
     
 
     public GameObject SpaceShip;

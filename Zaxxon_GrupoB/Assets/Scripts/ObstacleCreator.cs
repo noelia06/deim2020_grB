@@ -48,8 +48,8 @@ public class ObstacleCreator : MonoBehaviour
     //NOTA: habría que cambiar ese segundo por una variable que dependa de la velocidad
     IEnumerator InstanciadorColumnas()
     {
-        //Bucle infinito (poner esto es lo mismo que while(true){}
-        for (; ; )
+        //Bucle infinito (poner esto es lo mismo que for ( ; ;) {}
+        while(true)
         {
             CrearColumna();
             float interval = 4 / spaceshipMove.speed;
