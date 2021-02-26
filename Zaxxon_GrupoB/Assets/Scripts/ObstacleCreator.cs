@@ -27,7 +27,7 @@ public class ObstacleCreator : MonoBehaviour
 
         for (int n= 1; n <= 30; n++)
         {
-            CrearColumna(n*distanciaInicial);
+            CrearColumna(-n*distanciaInicial);
         }
         //Lanzo la corrutina
         StartCoroutine("InstanciadorColumnas");
